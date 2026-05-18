@@ -26,7 +26,7 @@ Een veilige Git Audit & Commit Assistant skill die eerst diagnose doet, dan pas 
 
 ## Verboden Acties
 - Geen `git init`.
-- Geen `git add .` als standaard. Add moet specifiek zijn of via een bevestigd proces.
+- **Geen `git add .` als standaard.** Add moet specifiek zijn (bv. `git add <file>`) of via de `files` parameter in de input komen.
 - Geen `git push` zonder expliciete Lexi-goedkeuring.
 - Geen `git reset --hard`.
 - Geen `git clean`.
@@ -56,6 +56,7 @@ Een veilige Git Audit & Commit Assistant skill die eerst diagnose doet, dan pas 
 ## Failure Rules
 - Als Git repo niet bestaat of `rev-parse` faalt: rapporteer als `failed` en vraag om initialisatie instructies.
 - Als `git status` onduidelijk is of conflicts aangeeft: rapporteer en escaleer naar Lexi/Controller.
+- Als er `unstaged` wijzigingen zijn bij een commit/push commando, of `staged` zijn bij een push commando zonder expliciete instructie voor add: rapporteer fout en wacht op Lexi's input.
 - Als push poging mislukt (bv. remote reject): rapporteer fout en wacht op instructie.
 - Als de output van een commando niet correct wordt geïnterpreteerd of gelogd.
 
