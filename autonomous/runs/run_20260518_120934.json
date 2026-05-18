@@ -1,0 +1,25 @@
+{
+  "timestamp": "20260518_120934",
+  "run_id": "run_20260518_120934",
+  "flow": "content_automation",
+  "critic": {
+    "output": {
+      "accepted": true,
+      "score": 9.0,
+      "main_problem": "",
+      "required_fix": "",
+      "reason": "Voldoet aan alle criteria: specifieke locatie, hondvriendelijk, faceless, maakbaar, rustige sfeer en aantrekkelijke visuals."
+    }
+  },
+  "finance": {
+    "output": {
+      "roi_score": 8.0,
+      "cost_risk": "Low, primarily relies on Lexi's time and existing equipment.",
+      "money_path": "Audience growth for nature/dog-friendly channels, potential affiliate marketing for outdoor gear, collaborations with local tourism.",
+      "recommendation": "continue"
+    }
+  },
+  "final_status": "accepted",
+  "normalized_by": "tools/normalize_latest_superbot_run.py",
+  "normalized_reason": "Normalized Hermes output into machine-readable Noa Superbot contract."
+}
