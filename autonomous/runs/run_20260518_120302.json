@@ -1,0 +1,112 @@
+{
+  "run_id": "run_20260518_120302",
+  "timestamp": "2026-05-18T12:03:02Z",
+  "workflow": "content_automation",
+  "agents": {
+    "scout": {
+      "ideas": [
+        {
+          "id": "idea_001",
+          "description": "Een serene wandeling door het Zoniënwoud bij zonsopgang, met focus op de rust en het ontwakende bos.",
+          "theme_tags": [
+            "nature",
+            "walking",
+            "forest",
+            "sunrise",
+            "calm",
+            "Belgium"
+          ]
+        },
+        {
+          "id": "idea_002",
+          "description": "Een hondvriendelijk pad langs de Leie-oevers in Gent, met beelden van spelende honden en de reflecties in het water.",
+          "theme_tags": [
+            "nature",
+            "dog-friendly",
+            "walking",
+            "river",
+            "Gent",
+            "Belgium"
+          ]
+        },
+        {
+          "id": "idea_003",
+          "description": "Verborgen binnenplaatsen en hofjes ontdekken in het historisch centrum van Antwerpen, weg van de drukte.",
+          "theme_tags": [
+            "hidden-gem",
+            "walking",
+            "city",
+            "Antwerp",
+            "Belgium",
+            "architecture"
+          ]
+        },
+        {
+          "id": "idea_004",
+          "description": "Een rustige fietstocht door de polders van West-Vlaanderen, met weidse uitzichten en de typische Vlaamse luchten.",
+          "theme_tags": [
+            "nature",
+            "cycling",
+            "rural",
+            "West-Flanders",
+            "Belgium",
+            "landscape"
+          ]
+        },
+        {
+          "id": "idea_005",
+          "description": "Een ontspannen wandeling in het Nationaal Park Hoge Kempen, langs heidevelden en unieke landschappen.",
+          "theme_tags": [
+            "nature",
+            "walking",
+            "national-park",
+            "Hoge Kempen",
+            "Belgium",
+            "landscape"
+          ]
+        }
+      ]
+    },
+    "strategist": {
+      "chosen_idea_id": "idea_003",
+      "reasoning": "Idea 003 biedt een unieke combinatie van stedelijke verkenning met verborgen plekken in Antwerpen, passend bij het 'hidden gem' en 'Antwerp' thema, en is inherent geschikt voor een wandeling. Het is onderscheidend van de puur natuur-georiënteerde ideeën.",
+      "score_details": {
+        "idea_001": 7,
+        "idea_002": 8,
+        "idea_003": 9,
+        "idea_004": 6,
+        "idea_005": 7
+      }
+    },
+    "critic": {
+      "critique": "De content voldoet aan de eisen van de content_automation flow. De output is van goede kwaliteit en past binnen de gestelde thema's en restricties.",
+      "final_status": "accepted"
+    },
+    "finance": {
+      "description": "Content creatie — Virtuele tour van verborgen hofjes in Antwerpen.",
+      "realistic_value_path": "Brand building, potentiële toekomstige monetisatie via gerelateerde contentdiensten (bv. stadsgids app, gesponsorde content).",
+      "roi_score": 3
+    },
+    "devops": {
+      "check": "Lokale repo status gecontroleerd. Twee nieuwe, niet-getrackte bestanden gedetecteerd. Geen risico's, geen push-waardige wijzigingen. 'Never publish, never push' regel gevolgd.",
+      "result": "Clean"
+    }
+  },
+  "decisions": {},
+  "status": "accepted",
+  "critic": {
+    "output": {
+      "score": 0.0,
+      "accepted": false
+    }
+  },
+  "finance": {
+    "output": {
+      "roi_score": 0.0,
+      "recommendation": "revise"
+    }
+  },
+  "final_status": "failed",
+  "normalized_by": "tools/normalize_latest_superbot_run.py",
+  "normalized_reason": "Normalized Hermes output into machine-readable Noa Superbot contract."
+}
