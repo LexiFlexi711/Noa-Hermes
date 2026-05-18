@@ -1,0 +1,12 @@
+# Noa-Hermes config template
+# Geen echte tokens, keys, auth-data of secrets in deze repo zetten.
+
+hermes:
+  config_path: "~/.hermes/config.yaml"
+  memory_path: "~/.hermes/memories"
+  soul_path: "~/.hermes/SOUL.md"
+
+safety:
+  no_secrets_in_git: true
+  require_approval_for_risky_actions: true
+  owner: "Lexi"
