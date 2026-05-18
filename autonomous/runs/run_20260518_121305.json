@@ -1,0 +1,20 @@
+{
+  "timestamp": "20260518_121305",
+  "run_id": "run_20260518_121305",
+  "flow": "content_automation",
+  "critic": {
+    "output": {
+      "score": 0.0,
+      "accepted": false
+    }
+  },
+  "finance": {
+    "output": {
+      "roi_score": 0.0,
+      "recommendation": "revise"
+    }
+  },
+  "final_status": "failed",
+  "normalized_by": "tools/normalize_latest_superbot_run.py",
+  "normalized_reason": "Normalized Hermes output into machine-readable Noa Superbot contract."
+}
