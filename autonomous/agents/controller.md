@@ -93,6 +93,7 @@ Controller en agents verwijzen naar:
   - `lexi_input_escalation.md`
 - `autonomous/protocols/` — agent-runtime/governance:
   - `anti_loop_protocol.md`
+  - `model_routing_policy.md`
 - `autonomous/workflows/` — workflow-definities:
   - `agent_chain.md`
 
