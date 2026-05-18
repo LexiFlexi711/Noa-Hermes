@@ -4,5 +4,20 @@
   "status": "completed",
   "workflow": "content_automation",
   "theme_applied": "Een verborgen, hondvriendelijke wandelplek langs de Schelde in Antwerpen, met focus op de rustgevende natuur.",
-  "output_file": "autonomous/outputs/content_20260518_115257.md"
+  "output_file": "autonomous/outputs/content_20260518_115257.md",
+  "critic": {
+    "output": {
+      "score": 0,
+      "accepted": false
+    }
+  },
+  "finance": {
+    "output": {
+      "roi_score": 0,
+      "recommendation": "revise"
+    }
+  },
+  "final_status": "failed",
+  "normalized_by": "tools/normalize_latest_superbot_run.py",
+  "normalized_reason": "Hermes wrote human-readable output but missed machine-readable schema fields."
 }

@@ -56,7 +56,9 @@ critic = run.get("critic") or run.get("agent_outputs", {}).get("critic") or {}
 if isinstance(critic, dict):
     out = critic.get("output", critic)
     if isinstance(out, dict):
-        critic_score = out.get("score") or out.get("critic_score")
+        critic_score = out.get("score")
+        if critic_score is None:
+            critic_score = out.get("critic_score")
 if critic_score is None:
     final_scores = run.get("final_scores", {})
     critic_score = final_scores.get("critic_score")
@@ -71,6 +73,8 @@ if isinstance(finance, dict):
     out = finance.get("output", finance)
     if isinstance(out, dict):
         finance_score = out.get("roi_score")
+        if finance_score is None:
+            finance_score = out.get("finance_score")
 if finance_score is None:
     final_scores = run.get("final_scores", {})
     finance_score = final_scores.get("finance_score")
