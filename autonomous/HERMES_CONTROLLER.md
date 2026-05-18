@@ -176,3 +176,13 @@ If Hermes or any subagent leaves the active flow:
 - final_status must be "failed"
 - Memory must add a rejected pattern
 - No content may be accepted
+
+## State Update Rule
+
+Only accepted runs may add winning_patterns.
+
+Rejected or failed runs must:
+- preserve existing winning_patterns
+- add a rejected pattern explaining the failure
+- set status to last_run_failed or last_run_rejected
+- set next_action to the exact fix required

@@ -21,3 +21,11 @@ JSON only.
 - Do not invent history.
 - Do not overwrite state blindly.
 - Every memory update must trace to a run.
+
+## Failed Run Rule
+
+If final_status is "failed":
+- do not add winning_patterns
+- add the failure reason to rejected_patterns
+- next_action must explain what must be fixed before retry
+- state.status must reflect failed run
