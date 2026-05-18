@@ -55,7 +55,7 @@ Een veilige Git Audit & Commit Assistant skill die eerst diagnose doet, dan pas 
 
 ## Failure Rules
 - Als Git repo niet bestaat of `rev-parse` faalt: rapporteer als `failed` en vraag om initialisatie instructies.
-- Als `git status` onduidelijk is of conflicts aangeeft: rapporteer en escaleer naar Lexi.
+- Als `git status` onduidelijk is of conflicts aangeeft: rapporteer en escaleer naar Lexi/Controller.
 - Als push poging mislukt (bv. remote reject): rapporteer fout en wacht op instructie.
 - Als de output van een commando niet correct wordt geïnterpreteerd of gelogd.
 
