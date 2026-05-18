@@ -1,0 +1,27 @@
+{
+  "bot_name": "Noa Superbot",
+  "controller": "Hermes",
+  "owner": "Lexi",
+  "real_world_mirror": "Lexi",
+  "version": "0.1.0",
+  "active_flow": "content_automation",
+  "status": "first_multi_agent_run_completed",
+  "runs_completed": 1,
+  "last_run": "20260518_104326",
+  "winning_patterns": [
+    {
+      "idea_id": "scout_001",
+      "title": "Vergeten WOII Bunkers in Kalmthoutse Heide",
+      "run_id": "run_20260518_104326"
+    }
+  ],
+  "rejected_patterns": [],
+  "next_action": "Fix critic factual consistency checks, then run SCOUT again",
+  "safety": {
+    "no_external_api_without_lexi": true,
+    "no_publishing_without_lexi": true,
+    "no_trading_without_lexi": true,
+    "no_git_push_without_lexi": true,
+    "no_secrets_in_git": true
+  }
+}
