@@ -50,6 +50,35 @@ Indien een agent output herhaalt zonder nieuwe input of significante statusveran
 - **Stop Run:** Markeer de run als `FAILED_NEEDS_LEXI`.
 - **Escalate:** Rapporteer direct aan Lexi de bevindingen en de noodzaak voor interventie.
 
+## Anti-loop enforcement
+
+**Scope-definitie — verplicht voor elke taak:**
+Controller zet `current_scope`:
+- `READ_ONLY` — alleen read_file, search_files, terminal_read_only.
+- `AUDIT_ONLY` — read/check/report only. Verboden: write_file, git add, commit, push, systeemfile edits.
+- `WRITE` — schrijven alleen binnen `allowed_files`.
+- `CUSTOM_SCOPE_X` — door Lexi gedefinieerd.
+
+**Harde stops — Controller staakt de run direct bij:**
+- `action_count` > 5.
+- `repeated_output_count` > 1 zonder vooruitgang.
+- `repeated_tool_count` > 1 zonder nieuwe input/output/fase/progress.
+- `evidence_required` = True zonder bewijs na actie.
+- `simulated_agent_input_detected` gedetecteerd.
+- Expliciete STOP van gebruiker.
+- Toolgebruik terwijl `phase` = `WAITING_FOR_LEXI`.
+- `write_file` of `terminal` (met wijziging) buiten `allowed_files`.
+
+**Stoprapport:**
+```
+LOOP_RISK: [HIGH/MEDIUM/LOW]
+STOP_REASON: [korte uitleg]
+LAST_SAFE_STATUS: { current_task, current_scope, phase, action_count, last_tool }
+FILES_CHANGED: [lijst]
+EVIDENCE: [logs/outputs die stop triggerden]
+NEXT_SAFE_ACTION: [wat Lexi moet doen]
+```
+
 ## Verantwoordelijkheid
 
 - Ontvangt opdrachten van Lexi.
