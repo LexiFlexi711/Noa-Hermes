@@ -1,0 +1,116 @@
+#!/usr/bin/env bash
+set -u
+
+ROOT="$HOME/Noa-Hermes"
+cd "$ROOT" || exit 1
+
+python3 - <<'PY'
+import json
+from pathlib import Path
+
+root = Path.home() / "Noa-Hermes"
+runs = root / "autonomous" / "runs"
+outputs = root / "autonomous" / "outputs"
+state_path = root / "autonomous" / "state.json"
+
+run_files = sorted(runs.glob("run_*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
+
+if not run_files:
+    print("VERIFY: FAILED")
+    print("Geen run_*.json gevonden.")
+    raise SystemExit(1)
+
+run_path = run_files[0]
+run = json.loads(run_path.read_text())
+
+stamp = run_path.stem.replace("run_", "")
+output_path = outputs / f"content_{stamp}.md"
+
+errors = []
+warnings = []
+
+if not output_path.exists():
+    errors.append(f"Output ontbreekt: {output_path}")
+
+if not state_path.exists():
+    errors.append("state.json ontbreekt")
+else:
+    state = json.loads(state_path.read_text())
+    if state.get("last_run") not in (stamp, run.get("timestamp"), run.get("last_run")):
+        warnings.append(f"state.last_run lijkt niet gelijk aan nieuwste run: state={state.get('last_run')} newest={stamp}")
+
+text_blob = json.dumps(run, ensure_ascii=False).lower()
+output_text = output_path.read_text().lower() if output_path.exists() else ""
+
+# Flow guard
+content_keywords = [
+    "natuur", "wandeling", "wandelen", "faceless", "antwerpen",
+    "belgië", "belgie", "hond", "bowie", "route", "heide", "park"
+]
+if not any(k in text_blob or k in output_text for k in content_keywords):
+    errors.append("Run lijkt niet bij content_automation/natuur/faceless flow te passen.")
+
+# Critic score extraction
+critic_score = None
+critic = run.get("critic") or run.get("agent_outputs", {}).get("critic") or {}
+if isinstance(critic, dict):
+    out = critic.get("output", critic)
+    if isinstance(out, dict):
+        critic_score = out.get("score") or out.get("critic_score")
+if critic_score is None:
+    final_scores = run.get("final_scores", {})
+    critic_score = final_scores.get("critic_score")
+
+if critic_score is None:
+    errors.append("Critic score ontbreekt.")
+
+# Finance score extraction
+finance_score = None
+finance = run.get("finance") or run.get("agent_outputs", {}).get("finance") or {}
+if isinstance(finance, dict):
+    out = finance.get("output", finance)
+    if isinstance(out, dict):
+        finance_score = out.get("roi_score")
+if finance_score is None:
+    final_scores = run.get("final_scores", {})
+    finance_score = final_scores.get("finance_score")
+
+if finance_score is None:
+    errors.append("Finance score ontbreekt.")
+else:
+    try:
+        fs = float(finance_score)
+        if fs < 0 or fs > 10:
+            errors.append(f"Finance score buiten 0-10: {finance_score}")
+    except Exception:
+        errors.append(f"Finance score is niet numeriek: {finance_score}")
+
+# Fantasy ROI guard
+fantasy_terms = ["estimated_roi", "potential_revenue_estimate", "700.0", "900.00", "guaranteed revenue"]
+if any(t in text_blob for t in fantasy_terms):
+    errors.append("Fantasy ROI / fake revenue indicatie gevonden.")
+
+# Status guard
+final_status = run.get("final_status") or run.get("final_system_status")
+if final_status not in ("success", "accepted", "rejected", "failed"):
+    warnings.append(f"final_status is zwak/onduidelijk: {final_status}")
+
+print("VERIFY RUN:", run_path)
+print("OUTPUT:", output_path if output_path.exists() else "MISSING")
+print("CRITIC_SCORE:", critic_score)
+print("FINANCE_SCORE:", finance_score)
+print("FINAL_STATUS:", final_status)
+
+if warnings:
+    print("\nWARNINGS:")
+    for w in warnings:
+        print("-", w)
+
+if errors:
+    print("\nVERIFY: FAILED")
+    for e in errors:
+        print("-", e)
+    raise SystemExit(1)
+
+print("\nVERIFY: PASSED")
+PY

@@ -147,3 +147,32 @@ Hermes may not:
 - trade live money
 - change providers/models without Lexi
 - hide failures
+
+## Flow Lock
+
+For active_flow = content_automation, Hermes and all subagents must stay inside:
+
+- faceless nature videos
+- Antwerp / Belgium / Netherlands
+- walking routes
+- calm nature
+- dog-friendly content
+- hidden local places
+- short-form video scripts
+- captions
+- hashtags
+- shotlists
+
+Forbidden during content_automation:
+- industrial revolution articles
+- generic blog articles
+- SEO articles unrelated to nature/social video
+- financial news
+- unrelated educational essays
+- fake trend claims
+- fake ROI calculations
+
+If Hermes or any subagent leaves the active flow:
+- final_status must be "failed"
+- Memory must add a rejected pattern
+- No content may be accepted

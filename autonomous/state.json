@@ -6,8 +6,8 @@
   "version": "0.1.0",
   "active_flow": "content_automation",
   "status": "first_multi_agent_run_completed",
-  "runs_completed": 1,
-  "last_run": "20260518_104326",
+  "runs_completed": 2,
+  "last_run": "20260518_113109",
   "winning_patterns": [
     {
       "idea_id": "scout_001",
@@ -15,8 +15,14 @@
       "run_id": "run_20260518_104326"
     }
   ],
-  "rejected_patterns": [],
-  "next_action": "Fix critic factual consistency checks, then run SCOUT again",
+  "rejected_patterns": [
+    {
+      "type": "factual_inconsistency",
+      "details": "Industrial Revolution timeline vs WWI",
+      "run_id": "run_20260518_113109.json"
+    }
+  ],
+  "next_action": "Review Critic's feedback for Run #2 and decide on next steps (e.g., retry Producer, archive).",
   "safety": {
     "no_external_api_without_lexi": true,
     "no_publishing_without_lexi": true,
