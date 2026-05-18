@@ -1,0 +1,169 @@
+#!/usr/bin/env bash
+set -u
+
+ROOT="$HOME/Noa-Hermes"
+cd "$ROOT" || exit 1
+
+STAMP="$(date +%Y%m%d_%H%M%S)"
+RUN_PATH="autonomous/runs/run_${STAMP}.json"
+OUT_PATH="autonomous/outputs/content_${STAMP}.md"
+
+echo "========================================"
+echo " NOA SUPERBOT PIPELINE"
+echo " $STAMP"
+echo "========================================"
+
+echo
+echo "[1/4] Hermes opdracht geven om bestanden te maken..."
+
+noa "Werk in /home/sjoe/Noa-Hermes.
+
+BELANGRIJK:
+- 'NOA SUPERBOT' is GEEN shellcommando.
+- Voer NIET uit: NOA SUPERBOT run
+- Voer NIET uit: ./NOA
+- Zoek geen script met die naam.
+- Jij moet zelf de workflow uitvoeren door bestanden te lezen en te schrijven.
+
+Lees deze bestanden:
+- autonomous/HERMES_CONTROLLER.md
+- autonomous/state.json
+- autonomous/agents/scout.md
+- autonomous/agents/strategist.md
+- autonomous/agents/producer.md
+- autonomous/agents/critic.md
+- autonomous/agents/finance.md
+- autonomous/agents/devops.md
+- autonomous/agents/memory.md
+
+Maak een nieuwe content_automation run.
+
+Harde eisen:
+- Thema: faceless natuurvideo / wandeling / Antwerpen-België-Nederland / hondvriendelijk of verborgen plek.
+- Geen Industrial Revolution.
+- Geen blogartikel.
+- Geen financieel nieuws.
+- Geen fake opbrengst.
+- Finance roi_score moet 0-10 zijn.
+- Critic score moet 0-10 zijn.
+- final_status moet exact zijn: accepted, rejected of failed.
+- State.json moet bijgewerkt worden.
+- Geen install.
+- Geen push.
+- Geen publicatie.
+- Geen trading.
+- Geen delete.
+
+Schrijf exact deze twee nieuwe bestanden:
+- ${RUN_PATH}
+- ${OUT_PATH}
+
+Het JSON-bestand MOET minstens dit schema bevatten:
+
+{
+  \"timestamp\": \"${STAMP}\",
+  \"run_id\": \"run_${STAMP}\",
+  \"flow\": \"content_automation\",
+  \"critic\": {
+    \"output\": {
+      \"score\": 0,
+      \"accepted\": false
+    }
+  },
+  \"finance\": {
+    \"output\": {
+      \"roi_score\": 0,
+      \"recommendation\": \"continue|revise|reject\"
+    }
+  },
+  \"final_status\": \"accepted|rejected|failed\"
+}
+
+Geen plannen. Geen uitleg vooraf. Maak de bestanden."
+
+echo
+echo "[2/4] Controleren of Hermes de gevraagde run echt gemaakt heeft..."
+
+if [ ! -f "$RUN_PATH" ] || [ ! -f "$OUT_PATH" ]; then
+  echo "FOUT: Hermes heeft de gevraagde bestanden niet gemaakt."
+  echo "Ontbrekend of onvolledig:"
+  [ -f "$RUN_PATH" ] || echo "- $RUN_PATH"
+  [ -f "$OUT_PATH" ] || echo "- $OUT_PATH"
+
+  echo
+  echo "Fallback failure-run schrijven zodat pipeline eerlijk blijft..."
+
+  cat > "$RUN_PATH" <<JSON
+{
+  "timestamp": "$STAMP",
+  "run_id": "run_$STAMP",
+  "flow": "content_automation",
+  "controller": "noa-superbot-run",
+  "critic": {
+    "output": {
+      "score": 0,
+      "accepted": false,
+      "reason": "Hermes did not create the required run/output files."
+    }
+  },
+  "finance": {
+    "output": {
+      "roi_score": 0,
+      "recommendation": "reject"
+    }
+  },
+  "final_status": "failed"
+}
+JSON
+
+  cat > "$OUT_PATH" <<MD
+# NOA Superbot Run: run_$STAMP
+
+## Final Status
+failed
+
+## Reason
+Hermes did not create the required run/output files.
+
+## Next Fix
+Tighten Hermes controller prompt or use local runner fallback.
+MD
+fi
+
+echo
+echo "[3/4] Normalizer draaien..."
+python3 tools/normalize_latest_superbot_run.py
+
+echo
+echo "[4/4] Verifier draaien..."
+if noa-superbot-verify; then
+  STATUS="$(python3 - <<'PY2'
+import json
+from pathlib import Path
+p = sorted((Path.home() / "Noa-Hermes" / "autonomous" / "runs").glob("run_*.json"), key=lambda x: x.stat().st_mtime, reverse=True)[0]
+data = json.loads(p.read_text())
+print(data.get("final_status", "unknown"))
+PY2
+)"
+  echo
+  echo "========================================"
+  if [ "$STATUS" = "accepted" ]; then
+    echo " RESULTAAT: VALIDATED_ACCEPTED"
+    echo "========================================"
+    exit 0
+  elif [ "$STATUS" = "rejected" ]; then
+    echo " RESULTAAT: VALIDATED_REJECTED"
+    echo "========================================"
+    exit 2
+  else
+    echo " RESULTAAT: VALIDATED_FAILED"
+    echo "========================================"
+    exit 3
+  fi
+else
+  echo
+  echo "========================================"
+  echo " RESULTAAT: INVALID"
+  echo "========================================"
+  exit 1
+fi
