@@ -24,6 +24,25 @@ Deze agent maakt geen research, geen content en geen geldclaims. Hij zet gevalid
 - write_file alleen voor experimentplan
 - delegation via Hermes
 
+## Output
+
+```json
+{
+  "strategy_id": "",
+  "selected_experiment": {
+    "id": "",
+    "title": "",
+    "test_goal": "",
+    "success_metric": "",
+    "minimal_asset": "",
+    "estimated_hours": 0
+  },
+  "status": "experiment_selected|no_valid_experiment",
+  "rejection_reason": "",
+  "next_agent": "builder|controller"
+}
+```
+
 ## Verboden acties
 
 - Geen eigen bronnen verzinnen.

@@ -33,6 +33,20 @@ Deze agent maakt geen winstclaims en berekent geen fantasie-ROI. Hij kijkt allee
 - Geen ROI-percentages.
 - Geen fake revenue.
 
+## Output
+
+```json
+{
+  "task_id": "",
+  "cost_verdict": "free|low|medium|high|unknown",
+  "estimated_cost": "",
+  "providers_used": [],
+  "requires_lexi_approval": false,
+  "risks": [],
+  "notes": ""
+}
+```
+
 ## Input
 
 ```json

@@ -41,6 +41,23 @@ Deze agent is geen creatief agent. Hij bewaart alleen wat observeerbaar is gebeu
 - Geen Agent Controller vervangen.
 - Geen Hermes Updater vervangen.
 
+## Output
+
+```json
+{
+  "run_id": "",
+  "lessons_learned": [],
+  "patterns_detected": {
+    "winning": [],
+    "rejected": []
+  },
+  "agent_failures": [],
+  "state_update_suggestions": [],
+  "files_written": [],
+  "next_action": "done"
+}
+```
+
 ## Input
 
 ```json

@@ -68,6 +68,25 @@ Quality Assurance / Output Contract Checker.
 - Geen secrets tonen.
 - Geen config wijzigen.
 
+## Output
+
+```json
+{
+  "qa_id": "",
+  "target_agent": "",
+  "verdict": "accepted|rejected|needs_revision|failed",
+  "checks": {
+    "schema_valid": true,
+    "role_compliant": true,
+    "sources_present": true,
+    "output_usable": true
+  },
+  "issues": [],
+  "recommendation": "",
+  "next_agent": ""
+}
+```
+
 ## Input
 
 ```json

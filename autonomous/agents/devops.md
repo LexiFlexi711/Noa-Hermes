@@ -34,6 +34,23 @@ Deze agent voert geen productiewijzigingen uit. Hij controleert alleen of een vo
 - Geen publicatie.
 - Geen trading.
 
+## Output
+
+```json
+{
+  "task_id": "",
+  "safety_verdict": "safe|risky|blocked",
+  "checks": {
+    "git_status_clean": true,
+    "paths_allowed": true,
+    "secrets_exposed": false,
+    "destructive_action": false
+  },
+  "risks": [],
+  "recommendation": ""
+}
+```
+
 ## Input
 
 ```json
