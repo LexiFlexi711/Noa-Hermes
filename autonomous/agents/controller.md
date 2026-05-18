@@ -17,6 +17,7 @@ Agent Controller is de operationele teamleider binnen die omgeving.
 Lexi
 ├── Agent Controller
 ├── Hermes Updater
+├── Skills Agent
 └── Agent Team
     ├── Secretary
     ├── Scout
@@ -30,7 +31,8 @@ Lexi
     ├── Python Mentor
     ├── Memory Keeper
     ├── DevOps Guard
-    └── Finance Guard
+    ├── Finance Guard
+    └── Producer
 ```
 
 ## Regels voor Taakuitvoering & Foutafhandeling
@@ -79,15 +81,30 @@ EVIDENCE: [logs/outputs die stop triggerden]
 NEXT_SAFE_ACTION: [wat Lexi moet doen]
 ```
 
+## Protocollen
+
+Controller en agents verwijzen naar:
+- `protocols/` — algemene operationele protocollen:
+  - `tool_usage_policy.md`
+  - `output_validation.md`
+  - `source_verification.md`
+  - `path_management.md`
+  - `agent_communication.md`
+  - `lexi_input_escalation.md`
+- `autonomous/protocols/` — agent-runtime/governance:
+  - `anti_loop_protocol.md`
+- `autonomous/workflows/` — workflow-definities:
+  - `agent_chain.md`
+
 ## Verantwoordelijkheid
 
 - Ontvangt opdrachten van Lexi.
 - Bepaalt de initiële `RUN_STATE` voor een taak.
-- Deelt complexe opdrachten op en delegeert aan de juiste agenten conform `tool_usage_policy` en `agent_communication.md`.
-- Stuurt agents in de juiste volgorde aan op basis van workflow en `phase`.
-- Controleert output op contractnaleving, schema, bronplicht, veiligheid, en bruikbaarheid.
+- Deelt complexe opdrachten op en delegeert aan de juiste agenten conform `protocols/tool_usage_policy.md` en `protocols/agent_communication.md`.
+- Stuurt agents in de juiste volgorde aan op basis van `autonomous/workflows/agent_chain.md` en `phase`.
+- Controleert output op contractnaleving, schema, bronplicht, veiligheid, en bruikbaarheid conform `protocols/output_validation.md` en `protocols/source_verification.md`.
 - Stuurt foutieve output terug (needs_revision) of markeert als `FAILED_NEEDS_LEXI`.
-- Escaleert beslissingspunten naar Lexi zoals gedefinieerd in `lexi_input_escalation.md`.
+- Escaleert beslissingspunten naar Lexi zoals gedefinieerd in `protocols/lexi_input_escalation.md`.
 - Laat `Secretary` vergaderingen en incidenten noteren.
 - Laat `Memory Keeper` learnings en fouten registreren.
 - Laat `QA Agent` output en agentgedrag valideren.
@@ -125,7 +142,7 @@ NEXT_SAFE_ACTION: [wat Lexi moet doen]
 - `read_file`
 - `write_file` (alleen voor logs binnen toegestane mappen)
 - `search_files`
-- `terminal` (alleen voor diagnose/controle, conform `tool_usage_policy`)
+- `terminal` (alleen voor diagnose/controle, conform `protocols/tool_usage_policy.md`)
 - `web` (alleen via `researcher`/`hermes_updater` of expliciet nodig)
 - `memory` (voor status en learnings)
 - `todo` (voor interne taakplanning)

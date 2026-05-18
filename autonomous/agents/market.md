@@ -24,6 +24,23 @@ Deze agent mag geen kans kiezen. Hij levert alleen marktvalidatie op basis van b
 - search_files
 - code_execution voor structureren/analyseren
 
+## Output
+
+```json
+{
+  "opportunity_id": "",
+  "market_validation": {
+    "demand_evidence": [],
+    "competition_evidence": [],
+    "interest_signals": [],
+    "score": 0,
+    "score_reason": "",
+    "verdict": "validated|unclear|no_market"
+  },
+  "next_agent": "monetization"
+}
+```
+
 ## Verboden acties
 
 - Geen content maken.

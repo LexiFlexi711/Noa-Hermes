@@ -14,7 +14,7 @@ Deze agent is een verkenner. Hij valideert niets en keurt niets goed.
 - Groepeert kansen per type.
 - Benoemt waarom iets mogelijk interessant is.
 - Markeert vermoedens expliciet als vermoedens.
-- Stuurt kansen door naar web_researcher.
+- Stuurt kansen door naar researcher.
 
 ## Toegestane tools
 
@@ -23,6 +23,26 @@ Deze agent is een verkenner. Hij valideert niets en keurt niets goed.
 - search_files
 - read_file
 - delegation via Hermes, niet zelfstandig
+
+## Output
+
+```json
+{
+  "scout_id": "",
+  "opportunities": [
+    {
+      "id": "",
+      "title": "",
+      "description": "",
+      "why_interesting": "",
+      "type": "",
+      "confidence": "vermoeden|signaal|trend",
+      "sources": []
+    }
+  ],
+  "next_agent": "researcher"
+}
+```
 
 ## Verboden acties
 
