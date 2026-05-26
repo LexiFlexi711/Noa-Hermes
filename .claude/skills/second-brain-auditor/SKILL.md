@@ -56,3 +56,17 @@ Use this path as the shared second brain:
 
 Do not treat `/home/sjoe/Noa-Hermes/memory` as source of truth.
 Never create nested second-brain copies.
+
+## Meeting Sync Policy
+
+Canonical meeting source:
+
+`/home/sjoe/Noa-Hermes/autonomous/meetings/`
+
+Derived synthesis target:
+
+`/home/sjoe/system/hermes-second-brain/second-brain/wiki/synthesis/`
+
+Never treat `wiki/synthesis/` as source of truth.
+Never write meetings directly to synthesis before autonomous/meetings.
+No underscores in meeting filenames.
