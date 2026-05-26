@@ -13,6 +13,9 @@ Agent Controller is de operationele teamleider binnen die omgeving.
 
 ## Hiërarchie
 
+Noa (Hermes Agent) is de runtime-omgeving waarin Agent Controller opereert.
+Agent Controller is een operationele rol binnen die omgeving.
+
 ```text
 Lexi
 ├── Agent Controller
