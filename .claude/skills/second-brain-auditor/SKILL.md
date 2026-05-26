@@ -47,3 +47,12 @@ Per probleem:
 - oorzaak
 - voorstel
 - risico
+
+## Canonical Brain Root
+
+Use this path as the shared second brain:
+
+`/home/sjoe/system/hermes-second-brain/second-brain`
+
+Do not treat `/home/sjoe/Noa-Hermes/memory` as source of truth.
+Never create nested second-brain copies.
